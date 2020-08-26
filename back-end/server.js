@@ -10,6 +10,25 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     err => {},
 );
 let Currency = require('./models/Currency');
+const CurrencyListItem = require('./models/CurrencyListItem');
+CurrencyListItem.count().count(result => {
+    if (result === null) {
+        request.get(
+            {
+                url: 'https://www.lb.lt/webservices/FxRates/FxRates.asmx/getCurrencyList',
+            },
+            function(error, res, body) {
+                let objects = parser.xml2json(body);
+                var currencyList = objects.CcyTbl.CcyNtry;
+                currencyList.forEach(item => {
+                    new CurrencyListItem({ code: item.Ccy, nameInLt: item.CcyNm[0]['_@ttribute'], nameInEn: item.CcyNm[1]['_@ttribute'] })
+                        .save()
+                        .catch(error => console.log(error));
+                });
+            },
+        );
+    }
+});
 Currency.count().then(count => {
     if (count === 0) {
         request.post({ url: 'https://www.lb.lt/webservices/FxRates/FxRates.asmx/getCurrentFxRates', form: { tp: 'EU' } }, function(
@@ -18,7 +37,7 @@ Currency.count().then(count => {
             body,
         ) {
             if (err) {
-                console.log(err);
+                return;
             }
             var objects = parser.xml2json(body);
 
