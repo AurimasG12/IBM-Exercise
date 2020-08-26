@@ -14,6 +14,7 @@ export class CurrenciesTableComponent implements OnInit {
     subscriptions: Subscription[] = [];
     currencyItemsList: CurrencyItem[] = [];
     currencies: Currency[] = [];
+    value: number;
     ngOnInit(): void {
         this.subscriptions.push(
             this.currenciesService.currenciesList.subscribe(items => (this.currencyItemsList = items)),
@@ -21,13 +22,10 @@ export class CurrenciesTableComponent implements OnInit {
         );
     }
     getCurrencyProportionByCode(code: string): number {
-        console.log(typeof code);
         if (this.currencies !== null && !this.currencyItemsList !== null) {
             if (this.currencies.find(item => item.currencyCode == code) === undefined) {
-                console.log(this.currencies.find(item => item.currencyCode == code));
                 return 0;
             } else {
-                console.log(this.currencies.find(item => item.currencyCode == code));
                 return Number(this.currencies.find(item => item.currencyCode == code).proportion);
             }
         }

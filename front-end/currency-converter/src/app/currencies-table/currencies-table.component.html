@@ -8,6 +8,7 @@
                         <th>Proportion</th>
                         <th>Name in EN</th>
                         <th>Name in LT</th>
+                        <th>Format euros to selected currency</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,6 +17,9 @@
                         <td>{{ getCurrencyProportionByCode(data.code) | number: '1.5-5' }}</td>
                         <td>{{ data.nameInEn }}</td>
                         <td>{{ data.nameInLt }}</td>
+                        <td>
+                            <app-formatter [proportion]="getCurrencyProportionByCode(data.code)"></app-formatter>
+                        </td>
                     </tr>
                 </tbody>
             </nz-table>
