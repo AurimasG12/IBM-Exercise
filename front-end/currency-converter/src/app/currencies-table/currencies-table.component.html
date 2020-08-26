@@ -1,0 +1,24 @@
+<div class="currencies-list">
+    <div class="container">
+        <div class="content">
+            <nz-table #currenciesTable [nzData]="currencyItemsList">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Proportion</th>
+                        <th>Name in EN</th>
+                        <th>Name in LT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of currenciesTable.data">
+                        <td>{{ data.code }}</td>
+                        <td>{{ getCurrencyProportionByCode(data.code) | number: '1.5-5' }}</td>
+                        <td>{{ data.nameInEn }}</td>
+                        <td>{{ data.nameInLt }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>

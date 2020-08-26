@@ -1,9 +1,11 @@
 const express = require('express'),
     app = express(),
     mongoose = require('mongoose'),
+    cors = require('cors'),
     config = require('./DB');
 var request = require('request');
 var parser = require('xml2json-light');
+const CurrencyListRoute = require('./routes/CurrencyList.route');
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {},
@@ -11,8 +13,8 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 );
 let Currency = require('./models/Currency');
 const CurrencyListItem = require('./models/CurrencyListItem');
-CurrencyListItem.count().count(result => {
-    if (result === null) {
+CurrencyListItem.count().then(result => {
+    if (result === 0) {
         request.get(
             {
                 url: 'https://www.lb.lt/webservices/FxRates/FxRates.asmx/getCurrencyList',
@@ -49,7 +51,8 @@ Currency.count().then(count => {
         });
     }
 });
-
+app.use(cors());
+app.use('/currencyList', CurrencyListRoute);
 app.listen(3000, function() {
     console.log('listening on 3000');
 });
