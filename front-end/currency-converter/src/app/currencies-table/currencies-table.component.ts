@@ -3,6 +3,7 @@ import { CurrenciesService } from '../shared/Services/currencies.service';
 import { CurrencyItem } from '../shared/Models/CurrencyItem';
 import { Subscription } from 'rxjs';
 import { Currency } from '../shared/Models/Currency';
+import { SessionService } from '../shared/Services/session.service';
 
 @Component({
     selector: 'app-currencies-table',

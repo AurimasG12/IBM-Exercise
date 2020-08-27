@@ -1,0 +1,14 @@
+<nz-table #activitiesTable [nzData]="activities">
+    <thead>
+        <tr>
+            <th>Result</th>
+            <th>Currency Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of activitiesTable.data">
+            <td>{{ data.result }}</td>
+            <td>{{ data.currencyCode }}</td>
+        </tr>
+    </tbody>
+</nz-table>

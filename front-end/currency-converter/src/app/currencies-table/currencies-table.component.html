@@ -18,7 +18,7 @@
                         <td>{{ data.nameInEn }}</td>
                         <td>{{ data.nameInLt }}</td>
                         <td>
-                            <app-formatter [proportion]="getCurrencyProportionByCode(data.code)"></app-formatter>
+                            <app-formatter [currencyCode]="data.code" [proportion]="getCurrencyProportionByCode(data.code)"></app-formatter>
                         </td>
                     </tr>
                 </tbody>

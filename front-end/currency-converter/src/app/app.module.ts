@@ -17,10 +17,14 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormatterComponent } from './formatter/formatter.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { StoreModule } from '@ngrx/store';
+import * as formatResultReducer from '../app/shared/reducers/FormatResult.reducer';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { SessionActivityTableComponent } from './session-activity-table/session-activity-table.component';
 registerLocaleData(en);
 
 @NgModule({
-    declarations: [AppComponent, CurrenciesTableComponent, FormatterComponent],
+    declarations: [AppComponent, CurrenciesTableComponent, FormatterComponent, SessionActivityTableComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -30,8 +34,12 @@ registerLocaleData(en);
         NzInputNumberModule,
         HttpClientModule,
         NzTableModule,
+        NzTabsModule,
         BrowserAnimationsModule,
         NgbModule,
+        StoreModule.forRoot({
+            formatResult: formatResultReducer.reducer,
+        }),
     ],
     providers: [{ provide: NZ_I18N, useValue: en_US }],
     bootstrap: [AppComponent],

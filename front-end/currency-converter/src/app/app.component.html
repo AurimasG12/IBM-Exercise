@@ -1,1 +1,13 @@
-<app-currencies-table></app-currencies-table>
+<div class="container">
+    <div class="content">
+        <h3>SesionID : {{ sessionId }}</h3>
+        <nz-tabset>
+            <nz-tab nzTitle="Currencies">
+                <app-currencies-table></app-currencies-table>
+            </nz-tab>
+            <nz-tab nzTitle="Session activity">
+                <app-session-activity-table></app-session-activity-table>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+</div>
