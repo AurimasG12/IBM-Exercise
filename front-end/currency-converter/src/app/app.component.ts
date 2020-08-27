@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
                 items.forEach(item => this.store.dispatch(new FormatResultAction.AddFormatResult(item)));
             }),
         );
-        if (localStorage.getItem('sessionId') !== null) {
+        if (localStorage.getItem('sessionId') === null) {
             this.subscriptions.push(this.sessionService.createSessionIfNotExist().subscribe());
         }
     }
